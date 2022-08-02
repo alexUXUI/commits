@@ -13970,9 +13970,8 @@ try {
         return {
             type: 'section',
             text: {
-                type: 'plain_text',
-                text: `Author: ${name} Commit: ${message}  <${url}|PR URL>`,
-                emoji: true,
+                type: 'mrkdwn',
+                text: `*Author:* ${name} *Commit:* ${message}  <${url}|PR URL>`,
             },
         };
     });
