@@ -2,6 +2,10 @@ name: 'Notify Slack'
 
 description: 'POST Github Information to slack'
 
+branding:
+  icon: 'mail'
+  color: 'green'
+
 inputs:
   url: # slack webhook url
     description: 'slack webhook URL'

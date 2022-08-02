@@ -3,25 +3,17 @@ const github = require('@actions/github');
 const axios = require('axios');
 
 try {
-  const url = core.getInput('url');
-  const token = core.getInput('token');
+  const url = core.getInput('url', { required: true });
+  const token = core.getInput('token', { required: true });
 
   const payload = JSON.stringify(github.context.payload, undefined, 2);
 
-  core.info('Going to log event payload');
-  core.notice('Going to log event payload');
-  console.log(`here is the payload`);
-  console.log(payload);
-
-  const commitMessage = github.context.payload?.commits?.[0]?.message;
   const commitUrl = github.context.payload?.commits?.[0]?.url;
-  const compareUrl = github.context.payload?.compare;
   const ref = github.context.payload?.ref;
 
   const commitMessages = github.context.payload?.commits?.map((commit) => {
     const {
       message,
-      url,
       author: { name },
     } = commit;
 
@@ -29,15 +21,10 @@ try {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `${capitalize(message)} - ${name} - <${url}|Pull Request>`,
+        text: `${capitalize(message)} - ${name}`,
       },
     };
   });
-
-  core.info('Going to log commit messages');
-  core.notice('Going to log commit messages');
-  console.log(`here are the commit messages`);
-  console.log(commitMessages);
 
   try {
     axios
@@ -57,7 +44,7 @@ try {
               type: 'section',
               text: {
                 type: 'mrkdwn',
-                text: `The following commits have been merged from the PR Branch ${ref.substring(
+                text: `The following commits have been merged to ${ref.substring(
                   11
                 )}. 🎯 \n See the entire difference <${commitUrl}|here 📝>.`,
               },
