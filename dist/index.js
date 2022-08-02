@@ -13968,7 +13968,7 @@ try {
             type: 'section',
             text: {
                 type: 'mrkdwn',
-                text: `${capitalize(message)} - <${url}|PR> - ${name}`,
+                text: `${capitalize(message)} - ${name}`,
             },
         };
     });
@@ -13988,7 +13988,7 @@ try {
                     type: 'section',
                     text: {
                         type: 'mrkdwn',
-                        text: `The following commits have been merged from branch \`${ref.substring(11)}\`. 🎯 \n See the entire difference <${commitUrl}|here 📝>.`,
+                        text: `The following commits have been merged to target branch \`${ref.substring(11)}\`. 🎯 \n See the entire difference <${commitUrl}|here 📝>.`,
                     },
                 },
                 {
