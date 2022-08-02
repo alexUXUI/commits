@@ -13971,7 +13971,7 @@ try {
             type: 'section',
             text: {
                 type: 'plain_text',
-                text: `Author: ${name} Commit: ${message}  <${url}| PR URL>`,
+                text: `Author: ${name} Commit: ${message}  <${url}|PR URL>`,
                 emoji: true,
             },
         };
