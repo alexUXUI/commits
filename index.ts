@@ -41,7 +41,7 @@ try {
               emoji: true,
             },
           },
-          [...commitMessages],
+          ...commitMessages,
           {
             type: 'divider',
           },
