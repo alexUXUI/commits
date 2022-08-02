@@ -37,7 +37,7 @@ try {
               type: 'header',
               text: {
                 type: 'plain_text',
-                text: 'New Release :rocket:',
+                text: 'New Release',
                 emoji: true,
               },
             },
@@ -47,26 +47,13 @@ try {
                 type: 'mrkdwn',
                 text: `The following commits have been merged to target branch \`${ref.substring(
                   11
-                )}\`. 🎯 \n See the entire difference <${commitUrl}|here 📝>.`,
+                )}\`. \n See the entire difference <${commitUrl}|here>.`,
               },
             },
             {
               type: 'divider',
             },
             ...commitMessages,
-            {
-              type: 'divider',
-            },
-            {
-              type: 'context',
-              elements: [
-                {
-                  type: 'plain_text',
-                  text: 'Made with 💜 Product Science',
-                  emoji: true,
-                },
-              ],
-            },
           ],
         },
         { headers: { authorization: `Bearer ${token}` } }
