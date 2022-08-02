@@ -13952,36 +13952,26 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+var _a, _b, _c, _d, _e, _f;
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const axios = __nccwpck_require__(6545);
 try {
-    const url = core.getInput('url');
-    const token = core.getInput('token');
+    const url = core.getInput('url', { required: true });
+    const token = core.getInput('token', { required: true });
     const payload = JSON.stringify(github.context.payload, undefined, 2);
-    core.info('Going to log event payload');
-    core.notice('Going to log event payload');
-    console.log(`here is the payload`);
-    console.log(payload);
-    const commitMessage = (_c = (_b = (_a = github.context.payload) === null || _a === void 0 ? void 0 : _a.commits) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.message;
-    const commitUrl = (_f = (_e = (_d = github.context.payload) === null || _d === void 0 ? void 0 : _d.commits) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.url;
-    const compareUrl = (_g = github.context.payload) === null || _g === void 0 ? void 0 : _g.compare;
-    const ref = (_h = github.context.payload) === null || _h === void 0 ? void 0 : _h.ref;
-    const commitMessages = (_k = (_j = github.context.payload) === null || _j === void 0 ? void 0 : _j.commits) === null || _k === void 0 ? void 0 : _k.map((commit) => {
-        const { message, url, author: { name }, } = commit;
+    const commitUrl = (_c = (_b = (_a = github.context.payload) === null || _a === void 0 ? void 0 : _a.commits) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.url;
+    const ref = (_d = github.context.payload) === null || _d === void 0 ? void 0 : _d.ref;
+    const commitMessages = (_f = (_e = github.context.payload) === null || _e === void 0 ? void 0 : _e.commits) === null || _f === void 0 ? void 0 : _f.map((commit) => {
+        const { message, author: { name }, } = commit;
         return {
             type: 'section',
             text: {
                 type: 'mrkdwn',
-                text: `${capitalize(message)} - ${name} - <${url}|Pull Request>`,
+                text: `${capitalize(message)} - ${name}`,
             },
         };
     });
-    core.info('Going to log commit messages');
-    core.notice('Going to log commit messages');
-    console.log(`here are the commit messages`);
-    console.log(commitMessages);
     try {
         axios
             .post(url, {
@@ -13998,7 +13988,7 @@ try {
                     type: 'section',
                     text: {
                         type: 'mrkdwn',
-                        text: `The following commits have been merged from the PR Branch ${ref.substring(11)}. 🎯 \n See the entire difference <${commitUrl}|here 📝>.`,
+                        text: `The following commits have been merged to ${ref.substring(11)}. 🎯 \n See the entire difference <${commitUrl}|here 📝>.`,
                     },
                 },
                 {
