@@ -13963,12 +13963,12 @@ try {
     const commitUrl = (_c = (_b = (_a = github.context.payload) === null || _a === void 0 ? void 0 : _a.commits) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.url;
     const ref = (_d = github.context.payload) === null || _d === void 0 ? void 0 : _d.ref;
     const commitMessages = (_f = (_e = github.context.payload) === null || _e === void 0 ? void 0 : _e.commits) === null || _f === void 0 ? void 0 : _f.map((commit) => {
-        const { message, author: { name }, } = commit;
+        const { message, url, author: { name }, } = commit;
         return {
             type: 'section',
             text: {
                 type: 'mrkdwn',
-                text: `${capitalize(message)} - ${name}`,
+                text: `${capitalize(message)} - <${url}|PR> - ${name}`,
             },
         };
     });
@@ -13988,7 +13988,7 @@ try {
                     type: 'section',
                     text: {
                         type: 'mrkdwn',
-                        text: `The following commits have been merged to ${ref.substring(11)}. 🎯 \n See the entire difference <${commitUrl}|here 📝>.`,
+                        text: `The following commits have been merged from branch \`${ref.substring(11)}\`. 🎯 \n See the entire difference <${commitUrl}|here 📝>.`,
                     },
                 },
                 {

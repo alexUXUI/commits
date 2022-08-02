@@ -14,6 +14,7 @@ try {
   const commitMessages = github.context.payload?.commits?.map((commit) => {
     const {
       message,
+      url,
       author: { name },
     } = commit;
 
@@ -21,7 +22,7 @@ try {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `${capitalize(message)} - ${name}`,
+        text: `${capitalize(message)} - <${url}|PR> - ${name}`,
       },
     };
   });
@@ -44,9 +45,9 @@ try {
               type: 'section',
               text: {
                 type: 'mrkdwn',
-                text: `The following commits have been merged to ${ref.substring(
+                text: `The following commits have been merged from branch \`${ref.substring(
                   11
-                )}. 🎯 \n See the entire difference <${commitUrl}|here 📝>.`,
+                )}\`. 🎯 \n See the entire difference <${commitUrl}|here 📝>.`,
               },
             },
             {
