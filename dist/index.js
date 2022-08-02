@@ -13960,7 +13960,6 @@ try {
     const url = core.getInput('url');
     const token = core.getInput('token');
     const payload = JSON.stringify(github.context.payload, undefined, 2);
-    console.log(payload);
     const commitMessage = (_c = (_b = (_a = github.context.payload) === null || _a === void 0 ? void 0 : _a.commits) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.message;
     const commitUrl = (_f = (_e = (_d = github.context.payload) === null || _d === void 0 ? void 0 : _d.commits) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.url;
     const compareUrl = (_g = github.context.payload) === null || _g === void 0 ? void 0 : _g.compare;
@@ -13971,13 +13970,13 @@ try {
             type: 'section',
             text: {
                 type: 'mrkdwn',
-                text: `${capitalize(message)} - ${name} - <${url}|Pull Request 🔍>`,
+                text: `${capitalize(message)} - ${name} - <${url}|Pull Request>`,
             },
         };
     });
-    console.log(commitMessages);
     try {
-        axios.post(url, {
+        axios
+            .post(url, {
             blocks: [
                 {
                     type: 'header',
@@ -13991,7 +13990,7 @@ try {
                     type: 'section',
                     text: {
                         type: 'mrkdwn',
-                        text: `The following commits have been merged to ${ref}. 🎯 \n See the entire <${commitUrl}|Change Log 📝>.`,
+                        text: `The following commits have been merged from the PR Branch ${ref.substring(11)}. 🎯 \n See the entire difference <${commitUrl}|here 📝>.`,
                     },
                 },
                 {
@@ -14012,14 +14011,22 @@ try {
                     ],
                 },
             ],
-        }, { headers: { authorization: `Bearer ${token}` } });
+        }, { headers: { authorization: `Bearer ${token}` } })
+            .then((response) => {
+            core.setOutput('success', true);
+            console.log(response.data);
+        })
+            .catch((error) => {
+            console.log(error);
+            core.setFailed(error.message);
+            core.setOutput('success', false);
+        });
     }
     catch (error) {
         console.log(error);
         core.setFailed(error.message);
         core.setOutput('success', false);
     }
-    // console.log(`The event payload: ${payload}`);
 }
 catch (error) {
     core.setFailed(error.message);
