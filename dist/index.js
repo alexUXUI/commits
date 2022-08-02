@@ -13966,11 +13966,12 @@ try {
     const compareUrl = (_g = github.context.payload) === null || _g === void 0 ? void 0 : _g.compare;
     const ref = (_h = github.context.payload) === null || _h === void 0 ? void 0 : _h.ref;
     const commitMessages = (_k = (_j = github.context.payload) === null || _j === void 0 ? void 0 : _j.commits) === null || _k === void 0 ? void 0 : _k.map((commit) => {
+        const { message, url, author: { name }, } = commit;
         return {
             type: 'section',
             text: {
                 type: 'plain_text',
-                text: JSON.stringify(commit),
+                text: `Author: ${name} Commit: ${message}  <${url}| PR URL>`,
                 emoji: true,
             },
         };
@@ -13987,10 +13988,10 @@ try {
                         emoji: true,
                     },
                 },
-                ...commitMessages,
                 {
                     type: 'divider',
                 },
+                ...commitMessages,
                 {
                     type: 'divider',
                 },

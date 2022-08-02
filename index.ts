@@ -16,11 +16,17 @@ try {
   const ref = github.context.payload?.ref;
 
   const commitMessages = github.context.payload?.commits?.map((commit) => {
+    const {
+      message,
+      url,
+      author: { name },
+    } = commit;
+
     return {
       type: 'section',
       text: {
         type: 'plain_text',
-        text: JSON.stringify(commit),
+        text: `Author: ${name} Commit: ${message}  <${url}| PR URL>`,
         emoji: true,
       },
     };
@@ -41,10 +47,10 @@ try {
               emoji: true,
             },
           },
-          ...commitMessages,
           {
             type: 'divider',
           },
+          ...commitMessages,
           {
             type: 'divider',
           },
