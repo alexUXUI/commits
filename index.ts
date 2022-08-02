@@ -28,39 +28,45 @@ try {
 
   console.log(commitMessages);
 
-  // axios.post(
-  //   url,
-  //   {
-  //     blocks: [
-  //       {
-  //         type: 'header',
-  //         text: {
-  //           type: 'plain_text',
-  //           text: 'New Release :rocket:',
-  //           emoji: true,
-  //         },
-  //       },
-  //       ...commitMessages,
-  //       {
-  //         type: 'divider',
-  //       },
-  //       {
-  //         type: 'divider',
-  //       },
-  //       {
-  //         type: 'context',
-  //         elements: [
-  //           {
-  //             type: 'plain_text',
-  //             text: 'Made with 💜 Product Science',
-  //             emoji: true,
-  //           },
-  //         ],
-  //       },
-  //     ],
-  //   },
-  //   { headers: { authorization: `Bearer ${token}` } }
-  // );
+  try {
+    axios.post(
+      url,
+      {
+        blocks: [
+          {
+            type: 'header',
+            text: {
+              type: 'plain_text',
+              text: 'New Release :rocket:',
+              emoji: true,
+            },
+          },
+          // ...commitMessages,
+          {
+            type: 'divider',
+          },
+          {
+            type: 'divider',
+          },
+          {
+            type: 'context',
+            elements: [
+              {
+                type: 'plain_text',
+                text: 'Made with 💜 Product Science',
+                emoji: true,
+              },
+            ],
+          },
+        ],
+      },
+      { headers: { authorization: `Bearer ${token}` } }
+    );
+  } catch (error) {
+    console.log(error);
+    core.setFailed(error.message);
+    core.setOutput('success', false);
+  }
 
   // console.log(`The event payload: ${payload}`);
 } catch (error) {
