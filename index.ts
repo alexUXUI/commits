@@ -8,6 +8,11 @@ try {
 
   const payload = JSON.stringify(github.context.payload, undefined, 2);
 
+  core.info('Going to log event payload');
+  core.notice('Going to log event payload');
+  console.log(`here is the payload`);
+  console.log(payload);
+
   const commitMessage = github.context.payload?.commits?.[0]?.message;
   const commitUrl = github.context.payload?.commits?.[0]?.url;
   const compareUrl = github.context.payload?.compare;
@@ -28,6 +33,11 @@ try {
       },
     };
   });
+
+  core.info('Going to log commit messages');
+  core.notice('Going to log commit messages');
+  console.log(`here are the commit messages`);
+  console.log(commitMessages);
 
   try {
     axios

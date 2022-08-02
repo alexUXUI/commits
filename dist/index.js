@@ -13960,6 +13960,10 @@ try {
     const url = core.getInput('url');
     const token = core.getInput('token');
     const payload = JSON.stringify(github.context.payload, undefined, 2);
+    core.info('Going to log event payload');
+    core.notice('Going to log event payload');
+    console.log(`here is the payload`);
+    console.log(payload);
     const commitMessage = (_c = (_b = (_a = github.context.payload) === null || _a === void 0 ? void 0 : _a.commits) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.message;
     const commitUrl = (_f = (_e = (_d = github.context.payload) === null || _d === void 0 ? void 0 : _d.commits) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.url;
     const compareUrl = (_g = github.context.payload) === null || _g === void 0 ? void 0 : _g.compare;
@@ -13974,6 +13978,10 @@ try {
             },
         };
     });
+    core.info('Going to log commit messages');
+    core.notice('Going to log commit messages');
+    console.log(`here are the commit messages`);
+    console.log(commitMessages);
     try {
         axios
             .post(url, {
