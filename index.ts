@@ -26,7 +26,7 @@ try {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*Author:* ${name} *Commit:* ${message}  <${url}|PR URL>`,
+        text: `${capitalize(message)} - ${name} - <${url}|Pull Request 🔍>`,
       },
     };
   });
@@ -44,6 +44,13 @@ try {
               type: 'plain_text',
               text: 'New Release :rocket:',
               emoji: true,
+            },
+          },
+          {
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
+              text: `The following commits have been merged to ${ref}. 🎯 \n See the entire <${commitUrl}|Change Log 📝>.`,
             },
           },
           {
@@ -76,4 +83,8 @@ try {
   // console.log(`The event payload: ${payload}`);
 } catch (error) {
   core.setFailed(error.message);
+}
+
+function capitalize(s) {
+  return s[0].toUpperCase() + s.slice(1);
 }
