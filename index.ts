@@ -28,41 +28,41 @@ try {
 
   console.log(commitMessages);
 
-  axios.post(
-    url,
-    {
-      blocks: [
-        {
-          type: 'header',
-          text: {
-            type: 'plain_text',
-            text: 'New Release :rocket:',
-            emoji: true,
-          },
-        },
-        ...commitMessages,
-        {
-          type: 'divider',
-        },
-        {
-          type: 'divider',
-        },
-        {
-          type: 'context',
-          elements: [
-            {
-              type: 'plain_text',
-              text: 'Made with 💜 Product Science',
-              emoji: true,
-            },
-          ],
-        },
-      ],
-    },
-    { headers: { authorization: `Bearer ${token}` } }
-  );
+  // axios.post(
+  //   url,
+  //   {
+  //     blocks: [
+  //       {
+  //         type: 'header',
+  //         text: {
+  //           type: 'plain_text',
+  //           text: 'New Release :rocket:',
+  //           emoji: true,
+  //         },
+  //       },
+  //       ...commitMessages,
+  //       {
+  //         type: 'divider',
+  //       },
+  //       {
+  //         type: 'divider',
+  //       },
+  //       {
+  //         type: 'context',
+  //         elements: [
+  //           {
+  //             type: 'plain_text',
+  //             text: 'Made with 💜 Product Science',
+  //             emoji: true,
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  //   { headers: { authorization: `Bearer ${token}` } }
+  // );
 
-  console.log(`The event payload: ${payload}`);
+  // console.log(`The event payload: ${payload}`);
 } catch (error) {
   core.setFailed(error.message);
 }
