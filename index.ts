@@ -45,9 +45,9 @@ try {
               type: 'section',
               text: {
                 type: 'mrkdwn',
-                text: `The following commits have been merged to target branch \`${ref.substring(
+                text: `The following commits have been merged to branch: \`${ref.substring(
                   11
-                )}\`. \n See the entire difference <${commitUrl}|here>.`,
+                )}\`. \n See the entire change <${commitUrl}|here>.`,
               },
             },
             {
